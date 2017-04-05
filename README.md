@@ -23,20 +23,20 @@ In order for this plugin to work in older browsers, includ webcomponents.js plug
 
 ```html
 <pop-up data-id="example2">
-	<pop-up-content>
-		<div class="p-header">
-			Welcom to my site!
-			<pop-up-close></pop-up-close>
-		</div>
-		<div class="p-body">
-			<div>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi vitae nisi libero cupiditate alias quam dignissimos quas corporis aspernatur, deleniti, quo modi dicta itaque. Voluptates perspiciatis totam ea quae eius.
-			</div>
-			<div>
-				<pop-up-close>Close</pop-up-close>
-			</div>
-		</div>
-	</pop-up-content>
+    <pop-up-content>
+        <div class="p-header">
+            Welcom to my site!
+            <pop-up-close></pop-up-close>
+        </div>
+        <div class="p-body">
+            <div>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi vitae nisi libero cupiditate alias quam dignissimos quas corporis aspernatur, deleniti, quo modi dicta itaque. Voluptates perspiciatis totam ea quae eius.
+            </div>
+            <div>
+                <pop-up-close>Close</pop-up-close>
+            </div>
+        </div>
+    </pop-up-content>
 </pop-up>
 
 <pop-up-open data-id="example">Open Pop-Up</pop-up-open>
