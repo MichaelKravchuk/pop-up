@@ -1,92 +1,104 @@
 function closest(el, fn) {
-    return el && (fn(el) ? el : closest(el.parentNode, fn));
+	return el && (fn(el) ? el : closest(el.parentNode, fn));
 }
 
 
 
 function closeLastOpenPopUp() {
 	var popUp = document.querySelector("pop-up.open");
-    if(popUp){
-    	popUp.close();
-    }
+	if(popUp){
+		popUp.close();
+	}
 }
 
 
 
 var PopupPrototype = Object.create(HTMLElement.prototype);
 PopupPrototype.createdCallback = function() {
-    var self = this;
+	var self = this;
 
-    // PRIVATE VARS ------------------------------------
+	// PRIVATE VARS ------------------------------------
 
-    var _isOpen = false;
-    	_globalName = this.getAttribute('data-id');
-
-
-    // end PRIVATE VARS --------------------------------
-
-    
-
-    // PROPERIES ---------------------------------------
-
-    this.name = 'pop-up'
-
-    // end PROPERIES -----------------------------------
+	var _isOpen = false;
+		_globalName = this.getAttribute('data-id');
 
 
+	// end PRIVATE VARS --------------------------------
 
-    // INIT --------------------------------------------
+	
 
-    function init(){
-        if(_globalName) try {
-            _globalName = _globalName.replace(/-([a-z])/g, _upper );
-            _globalName = _globalName.replace(_globalName[0], _globalName[0].toUpperCase() );
-            
-            if(window['popUp' + _globalName]){
-                throw new Error('Name for "ct-pop-up" must be unique!');
-            }
-            
-            window['popUp' + _globalName] = self;
+	// PROPERIES ---------------------------------------
 
-        } catch (e) {
-            console.log(e.name + ': ' + e.message, self);
-        }
-    }
+	this.name = 'pop-up'
 
-    // end INIT ----------------------------------------
+	// end PROPERIES -----------------------------------
 
 
 
-    // EVENTS ------------------------------------------
+	// INIT --------------------------------------------
 
-    this.addEventListener('click', function(event) {
-        e = event || window.event;
-        if (e.target == self) {
-            self.close();
-        }
-    });
+	function init(){
+		if(_globalName) try {
+			_globalName = _globalName.replace(/-([a-z])/g, _upper );
+			_globalName = _globalName.replace(_globalName[0], _globalName[0].toUpperCase() );
+			
+			if(window['popUp' + _globalName]){
+				throw new Error('Name for "ct-pop-up" must be unique!');
+			}
+			
+			window['popUp' + _globalName] = self;
 
-    // end EVENTS --------------------------------------
+		} catch (e) {
+			console.error(e.name + ': ' + e.message, self);
+		}
+	}
+
+	// end INIT ----------------------------------------
 
 
 
-    // METHODS -----------------------------------------
+	// EVENTS ------------------------------------------
 
-  	this.open = function(){
-    	self._isOpen = true;
-        self.classList.add("open");
-        document.querySelector('body').style.overflow = 'hidden';
-    }
+	this.addEventListener('click', function(event) {
+		e = event || window.event;
+		if (e.target == self) {
+			self.close();
+		}
+	});
 
-    this.close = function(){
-    	self._isOpen = false;
-        self.classList.remove("open");
-        document.querySelector('body').style.overflow = 'auto';
-    }
+	// end EVENTS --------------------------------------
 
-    // end METHODS -------------------------------------
 
-    init(); 
+
+	// METHODS -----------------------------------------
+
+	this.open = function(){
+		self._isOpen = true;
+		self.classList.add("open");
+		document.querySelector('body').style.overflow = 'hidden';
+	}
+
+	this.close = function(){
+		self._isOpen = false;
+		self.classList.remove("open");
+		document.querySelector('body').style.overflow = 'auto';
+	}
+
+	// end METHODS -------------------------------------
+
+
+
+	// PRIVATE METHODS ---------------------------------
+
+	var _upper = function(word) {
+		return word[1].toUpperCase();
+	}
+
+	// end PRIVATE METHODS -----------------------------
+
+
+
+	init(); 
 };
 var Popup = document.registerElement('pop-up', {prototype: PopupPrototype});
 
@@ -100,7 +112,12 @@ var Popup = document.registerElement('pop-up', {prototype: PopupPrototype});
 
 var ContentPopupPrototype = Object.create(HTMLElement.prototype);
 ContentPopupPrototype.createdCallback = function() {
-  	this.name = 'pop-up-content'
+	
+	// PROPERIES ---------------------------------------
+
+	this.name = 'pop-up-content'
+
+	// end PROPERIES -----------------------------------
 
 };
 var ContentPopup = document.registerElement('pop-up-content',{prototype: ContentPopupPrototype});
@@ -113,20 +130,26 @@ var ContentPopup = document.registerElement('pop-up-content',{prototype: Content
 
 
 
-var ClosePopupPrototype = Object.create(HTMLElement.prototype);
-ClosePopupPrototype.createdCallback = function() {
-  	this.name = 'pop-up-close'
+var PopupClosePrototype = Object.create(HTMLElement.prototype);
+PopupClosePrototype.createdCallback = function() {
+	
+	// PROPERIES ---------------------------------------
+
+	this.name = 'pop-up-close'
+
+	// end PROPERIES -----------------------------------
+
 
 	// EVENTS ------------------------------------------
 
-    this.addEventListener('click', function(e) {
-        closest(this, function(el) {return el.tagName === 'POP-UP'}).close();
-    });
+	this.addEventListener('click', function(e) {
+		closest(this, function(el) {return el.tagName === 'POP-UP'}).close();
+	});
 
-    // end EVENTS --------------------------------------
-    
+	// end EVENTS --------------------------------------
+	
 };
-var ClosePopup = document.registerElement('pop-up-close',{prototype: ClosePopupPrototype});
+var ClosePopup = document.registerElement('pop-up-close',{prototype: PopupClosePrototype});
 
 
 
@@ -136,22 +159,47 @@ var ClosePopup = document.registerElement('pop-up-close',{prototype: ClosePopupP
 
 
 
-var OpenPopupPrototype = Object.create(HTMLElement.prototype);
-OpenPopupPrototype.createdCallback = function() {
-  	this.name = 'pop-up-open'
+var PopupOpenPrototype = Object.create(HTMLElement.prototype);
+PopupOpenPrototype.createdCallback = function() {
+	var self = this;
+
+
+
+	// PRIVATE VARS ------------------------------------
+
+	var _id = this.getAttribute('data-id');
+
+
+	// end PRIVATE VARS --------------------------------
+
+
+	
+	// PROPERIES ---------------------------------------
+
+	this.name = 'pop-up-open'
+
+	// end PROPERIES -----------------------------------
+
+
 
 	// EVENTS ------------------------------------------
 
-    this.addEventListener('click', function(event) {
-        var id = this.getAttribute('data-id');
-        var popUp = document.querySelector('pop-up[data-id="'+id+'"]');
-        
-        if(popUp != undefined){
-           popUp.open();
-        }
-    });
+	this.addEventListener('click', function(event) {
+		var popUp = document.querySelector('pop-up[data-id="' + _id + '"]');
+		
+		try {
+			if(popUp != undefined){
+			   popUp.open();
+			} else{
+				throw new Error('Pop-Up with data-id "' + _id + '" not found!');
+			}
+		} catch (e) {
+			console.error(e.name + ': ' + e.message, self);
+		}
+	   
+	});
 
-    // end EVENTS --------------------------------------
-    
+	// end EVENTS --------------------------------------
+	
 };
-var OpenPopup = document.registerElement('pop-up-open',{prototype: OpenPopupPrototype});
+var OpenPopup = document.registerElement('pop-up-open',{prototype: PopupOpenPrototype});

@@ -1,3 +1,10 @@
+$baseColor: ("1": #000000, "2": #2b2c2e, "3": #565656, "4": #b8b8b8, "5": #e6e6e6, "6": #f5f6f6, "7": #f8f8f8); 
+$adtColor: ("1": #366dd6, "2": #4786ff);
+
+$time: 0.2s;
+
+
+
 pop-up{
     display: flex;
     position: fixed;
@@ -15,7 +22,7 @@ pop-up{
     	visibility: visible;
         background: rgba(0, 0, 0, .5);
 
-        .pop-up-content{
+        pop-up-content{
         	top: 0px !important;
         }
     }
@@ -45,22 +52,51 @@ pop-up{
             font-size: 1.714em;
             font-weight: 400;
             
-            &.error{
-                color: #ff0073;
-            }
 
-            close-pop-up{
+            pop-up-close{
+                --pop-up-close-color: #ecedef;
+                display: block;
                 position: absolute;
                 top: 30px;
                 right: 30px;
                 height: 20px;
                 width: 20px;
                 cursor: pointer;
-                background-image: linear-gradient(45deg, transparent calc(50% - 1px), #ecedef calc(50% - 1px), #ecedef calc(50% + 1px), transparent calc(50% + 1px), transparent 100%),  linear-gradient(-45deg, transparent calc(50% - 1px), #ecedef calc(50% - 1px), #ecedef calc(50% + 1px), transparent calc(50% + 1px), transparent 100%);
+                background-image: linear-gradient(45deg, transparent calc(50% - 1px), var(--pop-up-close-color) calc(50% - 1px), var(--pop-up-close-color) calc(50% + 1px), transparent calc(50% + 1px), transparent 100%),  linear-gradient(-45deg, transparent calc(50% - 1px), var(--pop-up-close-color) calc(50% - 1px), var(--pop-up-close-color) calc(50% + 1px), transparent calc(50% + 1px), transparent 100%);
+                
                 &:hover{
-                    background-image: linear-gradient(45deg, transparent calc(50% - 1px), #f77e7e calc(50% - 1px), #f77e7e calc(50% + 1px), transparent calc(50% + 1px), transparent 100%),  linear-gradient(-45deg, transparent calc(50% - 1px), #f77e7e calc(50% - 1px), #f77e7e calc(50% + 1px), transparent calc(50% + 1px), transparent 100%);
+                    --pop-up-close-color: #f77e7e;
                 }
             }
         }
+
+        .p-body{
+            padding-top: 30px;
+        }
+    }
+}
+
+pop-up-open{
+    display: inline-block;
+    white-space: nowrap;
+    font-family: Arial;
+    box-sizing: content-box;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 400;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 15px;
+    border-radius: 5px;
+    color: white;
+    border-bottom: 3px solid map-get($adtColor, "1");
+    background-color: map-get($adtColor, "2");
+    cursor: pointer;
+
+    &:hover{
+        margin-top: 3px;
+        background-color: map-get($adtColor, "1");
+        background-image: none;
+        border-bottom-width: 0px !important;
     }
 }
