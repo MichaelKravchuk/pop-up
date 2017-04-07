@@ -1,0 +1,22 @@
+{
+  "name": "ct-pop-up",
+  "version": "1.0.0",
+  "description": "custom tab pop-up",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelKravchuk/pop-up.git"
+  },
+  "keywords": [
+    "pop-up"
+  ],
+  "author": "Michael Kravchuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MichaelKravchuk/pop-up/issues"
+  },
+  "homepage": "https://github.com/MichaelKravchuk/pop-up#readme"
+}
