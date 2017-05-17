@@ -28,7 +28,15 @@
 	</pop-up>
 
 	<pop-up-open data-id="example">Open Pop-Up</pop-up-open>
-
+	
+	<script>
+		popUpExample.addEventListener('open', function() {
+			console.log("open");
+		})
+		popUpExample.addEventListener('close', function() {
+			console.log("close");
+		})
+	</script>
 </body>
 </html>
 

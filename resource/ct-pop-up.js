@@ -73,13 +73,16 @@ PopupPrototype.createdCallback = function() {
 	// METHODS -----------------------------------------
 
 	this.open = function(callback){
+		self.dispatchEvent( _open_() );
 		self._isOpen = true;
 		self.classList.add("open");
 		document.querySelector('body').style.overflow = 'hidden';
 		if(callback && typeof callback === 'function') callback(); 
+		
 	}
 
 	this.close = function(callback){
+		self.dispatchEvent( _close_() );
 		self._isOpen = false;
 		self.classList.remove("open");
 		document.querySelector('body').style.overflow = 'auto';
@@ -98,6 +101,29 @@ PopupPrototype.createdCallback = function() {
 
 	// end PRIVATE METHODS -----------------------------
 
+
+
+    // CUSTOM EVENTS -----------------------------------
+
+    var _open_ = function(){
+        return new CustomEvent("open", {
+            bubbles: true,
+            cancelable: true,
+            detail: {},
+        });
+    };
+
+
+
+    var _close_ = function(){
+        return new CustomEvent("close", {
+            bubbles: true,
+            cancelable: true,
+            detail: {},
+        });
+    };
+
+    // end CUSTOM EVENTS -------------------------------
 
 
 	init(); 

@@ -51,6 +51,12 @@ In order for this plugin to work in older browsers, includ webcomponents.js plug
 <br/>
 <br/>
 
+## Events
+* `open` - called when pop-up open
+* `close` - called when pop-up close
+<br/>
+<br/>
+
 ## Attributes
 * `data-id` - pop-up id`-required`
 <br/>
