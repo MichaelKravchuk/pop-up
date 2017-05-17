@@ -19,7 +19,7 @@ PopupPrototype.createdCallback = function() {
 
 	// PRIVATE VARS ------------------------------------
 
-	var _isOpen = false;
+	var _isOpen = false,
 		_globalName = this.getAttribute('data-id');
 
 
@@ -29,7 +29,7 @@ PopupPrototype.createdCallback = function() {
 
 	// PROPERIES ---------------------------------------
 
-	this.name = 'pop-up'
+	this.name = 'pop-up';
 
 	// end PROPERIES -----------------------------------
 
@@ -43,7 +43,7 @@ PopupPrototype.createdCallback = function() {
 			_globalName = _globalName.replace(_globalName[0], _globalName[0].toUpperCase() );
 			
 			if(window['popUp' + _globalName]){
-				throw new Error('Name for "ct-pop-up" must be unique!');
+				throw new Error('Attribute data-id for "ct-pop-up" must be unique!');
 			}
 			
 			window['popUp' + _globalName] = self;
@@ -72,16 +72,18 @@ PopupPrototype.createdCallback = function() {
 
 	// METHODS -----------------------------------------
 
-	this.open = function(){
+	this.open = function(callback){
 		self._isOpen = true;
 		self.classList.add("open");
 		document.querySelector('body').style.overflow = 'hidden';
+		if(callback && typeof callback === 'function') callback(); 
 	}
 
-	this.close = function(){
+	this.close = function(callback){
 		self._isOpen = false;
 		self.classList.remove("open");
 		document.querySelector('body').style.overflow = 'auto';
+		if(callback && typeof callback === 'function') callback(); 
 	}
 
 	// end METHODS -------------------------------------

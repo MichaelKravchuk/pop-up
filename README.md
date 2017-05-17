@@ -46,8 +46,8 @@ In order for this plugin to work in older browsers, includ webcomponents.js plug
 <br/>
 
 ## Methods
-* `open()` - Opening pop-up
-* `close()` - Closed pop-up
+* `open(callback)` - Opening pop-up
+* `close(callback)` - Closed pop-up
 <br/>
 <br/>
 
